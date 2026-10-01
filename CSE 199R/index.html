@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Monthly Budget Dashboard</title>
+  
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+  
+    <meta name="theme-color" content="#007aff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="default"
+    >
+  </head>
+  
+<body>
+  <nav>
+    <a href="index.html" aria-current="page">Budget</a>
+    <a href="subscriptions.html">Subscriptions</a>
+  </nav>
+
+  <header>
+    <h1>Monthly Budget Dashboard</h1>
+    <p>Plan your money, track your spending, and stay within your budget.</p>
+  </header>
+
+  <main>
+    <section class="month-navigation">
+      <button type="button" id="previous-month" aria-label="Previous month">
+        &larr;
+      </button>
+
+      <h2 id="current-month">September 2026</h2>
+
+      <button type="button" id="next-month" aria-label="Next month">
+        &rarr;
+      </button>
+    </section>
+
+    <section class="budget-summary">
+      <h2>Budget Summary</h2>
+
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h3>Income</h3>
+          <p>$<span id="total-income">0.00</span></p>
+        </div>
+
+        <div class="summary-card">
+          <h3>Monthly Budget</h3>
+          <p>$<span id="budget-limit-display">0.00</span></p>
+        </div>
+
+        <div class="summary-card">
+          <h3>Expenses</h3>
+          <p>$<span id="total-expenses">0.00</span></p>
+        </div>
+
+        <div class="summary-card">
+          <h3>Remaining</h3>
+          <p>$<span id="remaining-budget">0.00</span></p>
+        </div>
+      </div>
+
+      <div class="budget-gauge">
+        <svg viewBox="0 0 200 120" aria-label="Budget usage">
+          <path
+            class="gauge-background"
+            d="M20 100 A80 80 0 0 1 180 100">
+          </path>
+
+          <path
+            id="gauge-progress"
+            class="gauge-progress"
+            d="M20 100 A80 80 0 0 1 180 100">
+          </path>
+        </svg>
+
+        <span id="budget-percent">Add budget</span>
+      </div>
+
+      <p class="gauge-label">Budget used</p>
+
+      <p id="budget-status" aria-live="polite">
+        Enter your income and monthly budget to begin.
+      </p>
+    </section>
+
+    <section>
+      <h2>Spending by Category</h2>
+
+      <div id="category-breakdown">
+        <p class="empty-message">
+          Add expenses to see your spending breakdown.
+        </p>
+      </div>
+    </section>
+
+    <div class="form-grid">
+      <section>
+        <h2>Monthly Income</h2>
+
+        <form id="income-form">
+          <label for="income">Income amount:</label>
+
+          <div class="currency-input">
+            <span>$</span>
+            <input
+              type="number"
+              id="income"
+              min="0.01"
+              step="0.01"
+              placeholder="520.00"
+              required
+            >
+          </div>
+
+          <label for="budget-limit">Monthly budget:</label>
+
+          <div class="currency-input">
+            <span>$</span>
+            <input
+              type="number"
+              id="budget-limit"
+              min="0.01"
+              step="0.01"
+              placeholder="500.00"
+              required
+            >
+          </div>
+
+          <button type="submit">
+            Save Income &amp; Budget
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Add Expense</h2>
+
+        <form id="expense-form">
+          <label for="expense-amount">Expense amount:</label>
+
+          <div class="currency-input">
+            <span>$</span>
+            <input
+              type="number"
+              id="expense-amount"
+              min="0.01"
+              step="0.01"
+              placeholder="Enter expense"
+              required
+            >
+          </div>
+
+          <label for="category">Category:</label>
+
+          <select id="category" required>
+            <option value="">Choose a category</option>
+            <option value="Food">Food</option>
+            <option value="Housing">Housing</option>
+            <option value="Transportation">Transportation</option>
+            <option value="School">School</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <button type="submit">Add Expense</button>
+        </form>
+      </section>
+    </div>
+
+    <section class="savings-section">
+      <h2>Savings Goals</h2>
+    
+      <div id="savings-goals-list">
+        <p class="empty-message">
+          Add a savings goal to start tracking your progress.
+        </p>
+      </div>
+    
+      <button
+        type="button"
+        id="add-savings-goal-button"
+        class="savings-action-button">
+        Add Savings Goal
+      </button>
+    
+      <form id="savings-form" hidden>
+        <label for="savings-name">Goal name:</label>
+    
+        <input
+          type="text"
+          id="savings-name"
+          placeholder="Emergency Fund"
+          required
+        >
+    
+        <label for="savings-target">Target amount:</label>
+    
+        <div class="currency-input">
+          <span>$</span>
+          <input
+            type="number"
+            id="savings-target"
+            min="0.01"
+            step="0.01"
+            required
+          >
+        </div>
+    
+        <label for="savings-current">Amount saved:</label>
+    
+        <div class="currency-input">
+          <span>$</span>
+          <input
+            type="number"
+            id="savings-current"
+            min="0"
+            step="0.01"
+            required
+          >
+        </div>
+    
+        <button type="submit" id="savings-submit-button">
+          Save Goal
+        </button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Expense History</h2>
+
+      <p class="swipe-hint">
+        Swipe left on an expense to edit or delete it.
+      </p>
+
+      <ul id="expense-list">
+        <li class="empty-message">
+          Your expenses will appear here after you add one.
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>
